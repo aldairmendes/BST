@@ -23,7 +23,7 @@ public class BinarySearchTree {
     
     private Node findRecursive(Node current, int key) {
         if(current == null) {
-            System.out.println("404 - Not found.")
+            System.out.println("404 - Not found.");
             return null;
         }
         if(current.key == key) {
@@ -40,16 +40,35 @@ public class BinarySearchTree {
         deleteRecursive(root, key);
     }
     
-    // private void deleteRecursive(Node current, int key) {
-        //     if(current == null) {
-            //         System.out.println("404 - Not found.")
-            //         return;
-            //     }
-            //     deleteRecursive(current.left, key);
-            //     deleteRecursive(current.right, key);
-            // }
+    private void deleteRecursive(Node current, int key) {
+        if(current == null) {
+            System.out.println("404 - Not found.");
+            return;
+        }
+
+        if(current.key > key) {
+            deleteRecursive(current.left, key);
+        }
+
+        if(current.key < key) {
+            deleteRecursive(current.right, key);
+        }
+
+        if(current.key == key) {
+
+            if(current.left != null) {
+
+                if(current.right != null) {
+                    var left = current.left;
+                    current.left = current.right;
+                    current = left;
+                }
+                current = current.left;
+            }
+        }
+    }
     public void print() {
-        print(root);
+        printRecursive(root);
     }
 
     public void printRecursive(Node current) {
